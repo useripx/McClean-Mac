@@ -89,19 +89,23 @@ flowchart TD
 
 ---
 
-### 🟡 FASE 2: UX Lanjutan, Universal Binary & Rilis Publik (v1.1.0-macos)
-**Target: November – Desember 2026 | Status: SIAP DIKERJAKAN (NEXT SPRINT)**
+### 🟢 FASE 2: UX Lanjutan, Universal Binary & Rilis Publik (v1.1.0-macos)
+**Target: 10 November 2026 | Status: SELESAI 100% (COMPLETED)**
 
-1. **Publikasi Rilis GitHub (Release v1.0.0-macos):**
-   - Menandai tag rilis `v1.0.0` dan memicu GitHub Actions untuk membuat berkas `MrClean-macOS.dmg` resmi pada halaman GitHub Releases.
-2. **Universal 2 Binary Support:**
-   - Menambahkan opsi kompilasi arsitektur ganda (`arm64` untuk Apple Silicon M1-M4 dan `x86_64` untuk Mac Intel) dalam satu bundel biner universal menggunakan PyInstaller `--target-arch universal2`.
-3. **Stylized Installer DMG:**
-   - Menambahkan skrip pembungkus DMG visual dengan latar belakang grafis dan panah petunjuk seret ikon `MrClean.app` ke alias folder `/Applications` (menggunakan utilitas `create-dmg`).
-4. **Dukungan Drag & Drop Langsung ke Jendela (Native DnD):**
-   - Mengintegrasikan mekanisme drop target pada jendela GUI sehingga pengguna dapat menyeret berkas/folder langsung dari Finder ke dalam aplikasi.
-5. **Aset Dokumentasi Publik:**
-   - Merekam video demonstrasi dan membuat banner visual/GIF untuk mempercantik halaman muka `README.md`.
+- [x] **Dukungan Drag & Drop Langsung ke GUI (`src/gui/app.py`):**
+  - Parser drop data pintar `parse_dropped_files` dan handler drop `handle_dropped_paths`.
+  - Event native macOS `::tk::mac::OpenDocument` untuk penarikan berkas langsung ke ikon Dock atau Finder OpenWith.
+  - Tampilan visual drop-zone ramah pengguna saat daftar berkas kosong.
+- [x] **Universal 2 Fat Binary Support:**
+  - Opsi flag `--universal` (`--target-arch universal2`) pada `build_mac.py` untuk mengemas biner Apple Silicon (`arm64`) dan Intel (`x86_64`) sekaligus.
+- [x] **Stylized DMG Installer Layout:**
+  - Integrasi utilitas `create-dmg` dengan visual layout Apple (Ikon MrClean di kiri ➜ Panah petunjuk ➜ Folder `/Applications` di kanan) dengan fallback otomatis `hdiutil`.
+- [x] **Alat Otomatisasi Rilis (`tools/create_release.py`):**
+  - Validasi SemVer resmi, testing gate 100% PASS otomatis, pembuatan Git tag, dan sinkronisasi ke branch `main`.
+- [x] **Pembaruan Workflow GitHub Actions (`.github/workflows/build-mac.yml`):**
+  - Mengotomatiskan publikasi *GitHub Release* dengan biner `dist/MrClean-macOS.dmg` terlampir saat tag rilis di-push.
+- [x] **Unit Testing Suite Tambahan:**
+  - 49 unit tests lulus tanpa gagal (**100% PASS, 0 GAGAL / 0 ERROR**).
 
 ---
 
@@ -142,6 +146,6 @@ flowchart TD
 | Milestone | Versi Target | Fitur Utama | Status Saat Ini |
 | :--- | :---: | :--- | :---: |
 | **Milestone 1** | `v1.0.0` | Paritas 11 Fitur, 44 Tests PASS, GUI Mac, Quick Action, `.icns`, CI/CD | 🟢 **SELESAI (100%)** |
-| **Milestone 2** | `v1.1.0` | GitHub Releases DMG, Universal 2 Fat Binary, Native Drag & Drop | 🟡 **Fokus Berikutnya** |
-| **Milestone 3** | `v1.2.0` | Format RAW, Telemetri Drone GPS, Offline Map Viewer, Audio Stego | ⚪ Terjadwal Q1 2027 |
+| **Milestone 2** | `v1.1.0` | Drag & Drop GUI, Universal 2 Fat Binary, Stylized DMG, Release Tool | 🟢 **SELESAI (100%)** |
+| **Milestone 3** | `v1.2.0` | Format RAW, Telemetri Drone GPS, Offline Map Viewer, Audio Stego | 🟡 **Fokus Berikutnya (Q1 2027)** |
 | **Milestone 4** | `v2.0.0` | Menu Bar Quick Clean, Apple Shortcuts, Homebrew Cask, Apple Notarization | ⚪ Terjadwal Q2 2027 |

@@ -8,6 +8,9 @@ on:
     branches: [ main, develop ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build-macos:
     runs-on: macos-latest # Runner resmi GitHub Actions Apple Silicon M-series
@@ -20,9 +23,9 @@ jobs:
         with:
           python-version: '3.13'
 
-      - name: Install System Dependencies (Tkinter)
+      - name: Install System Dependencies (Tkinter & create-dmg)
         run: |
-          brew install python-tk@3.13 || true
+          brew install python-tk@3.13 create-dmg || true
 
       - name: Install Python Dependencies
         run: |
@@ -44,3 +47,13 @@ jobs:
           name: MrClean-macOS-Installer
           path: dist/MrClean-macOS.dmg
           if-no-files-found: warn
+
+      - name: Create GitHub Release (Tags Only)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/MrClean-macOS.dmg
+          name: Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true

@@ -48,3 +48,17 @@
 - **Konteks:** Pengembang memerlukan cara membuat bundel `.app` dan `.dmg` secara gratis dan otomatis tanpa harus memiliki perangkat keras Mac fisik lokal.
 - **Keputusan:** Menyiapkan alur kerja CI/CD `.github/workflows/build-mac.yml` yang berjalan di runner native Apple Silicon M-series (`macos-latest`) pada setiap push ke branch `develop`/`main` atau tag rilis.
 - **Konsekuensi:** Installer `MrClean-macOS.dmg` dihasilkan secara otomatis di cloud GitHub.
+
+### ADR-007: Penanganan Drag & Drop Native dan macOS OpenDocument Callback
+- **Tanggal:** 10 November 2026
+- **Status:** DITERIMA / AKTIF
+- **Konteks:** Pengguna desktop macOS menginginkan kemudahan menarik (*drag-and-drop*) berkas langsung ke jendela GUI atau ikon di Dock tanpa membuka file picker.
+- **Keputusan:** Mengimplementasikan parser drop path pintar `parse_dropped_files` dan binding event `::tk::mac::OpenDocument` pada `src/gui/app.py` tanpa mewajibkan dependensi C-extension pihak ketiga.
+- **Konsekuensi:** UX lebih mulus, stabil, dan ramah pengguna Apple.
+
+### ADR-008: Release Automation SemVer & Tagged Release Pipeline
+- **Tanggal:** 10 November 2026
+- **Status:** DITERIMA / AKTIF
+- **Konteks:** Pengembang membutuhkan kemudahan memublikasikan versi rilis dengan tag Git resmi tanpa risiko melanggar kebersihan branch `main`.
+- **Keputusan:** Membangun `tools/create_release.py` yang memvalidasi SemVer, memastikan testing gate 100% PASS, menyinkronkan rilis bersih ke `main`, dan memicu workflow rilis GitHub Actions.
+- **Konsekuensi:** Distribusi versi rilis terstandarisasi, aman, dan dapat diulang (*reproducible*).
