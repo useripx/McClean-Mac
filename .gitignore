@@ -1,0 +1,53 @@
+# macOS System Junk
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+.LSOverride
+
+# Python Cache & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Distribution & Build Artifacts
+build/
+dist/
+eggs/
+*.egg-info/
+*.egg
+*.spec
+*.app/
+*.dmg
+*.pkg
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# IDE & Editor Configs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Environment Variables & Secrets (Zero Leakage)
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
