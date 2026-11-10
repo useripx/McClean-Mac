@@ -144,14 +144,33 @@ Hasil kompilasi akan berada di folder `dist/`:
 
 ---
 
+## 🍺 Instalasi Cepat via Homebrew (macOS)
+
+Pengguna Mac dapat memasang MrClean dengan satu baris terminal:
+
+```bash
+# Tambahkan tap resmi dan pasang Cask
+brew tap useripx/mrclean
+brew install --cask mrclean
+```
+
+Setelah terpasang, MrClean tersedia sebagai aplikasi GUI di `/Applications/MrClean.app` maupun perintah baris terminal `mrclean`:
+
+```bash
+mrclean inspect foto.jpg --json
+mrclean clean berkas.docx --preset academic
+mrclean spoof gambar.jpg --profile canon
+```
+
+---
+
 ## 🗺️ Peta Jalan Pengembangan (Roadmap)
 
 Peta jalan pengembangan produk MrClean Mac terbagi dalam 4 fase strategis:
 - 🟢 **Fase 1 (v1.0.0-macos):** Pondasi 11 Fitur Paritas Penuh, Test Suite 100% PASS (44 Tests), GUI Apple San Francisco, Finder Quick Action, Aset Apple ICNS, Packaging DMG & GitHub Actions CI/CD. *(SELESAI)*
 - 🟢 **Fase 2 (v1.1.0-macos):** Drag & Drop Langsung ke GUI, Universal 2 Fat Binary (`arm64` + `x86_64`), Stylized DMG Drag-to-Applications, Otomatisasi Rilis SemVer & 49 Tests PASS. *(SELESAI)*
 - 🟢 **Fase 3 (v1.2.0-macos):** Format Kamera Mentah RAW (Sony ARW, Canon CR2/CR3, Nikon NEF, Fuji RAF, DNG), Telemetri Video Drone GPS (DJI/GoPro), Offline GPS Map Viewer, Audio Steganography & 57 Tests PASS. *(SELESAI)*
-- 🟡 **Fase 4 (v2.0.0-macos):** macOS Menu Bar Status Item App, Apple Shortcuts Integration, Homebrew Tap Distribution, dan Apple Notarization. *(Fokus Berikutnya - Q2 2027)*
-- 🟣 **Fase 4 (v2.0.0-macos):** macOS Menu Bar Status Item App, Apple Shortcuts Integration, Homebrew Tap Distribution, dan Apple Notarization. *(Q2 2027)*
+- 🟢 **Fase 4 (v2.0.0-macos):** macOS Menu Bar Status Item App, Headless CLI Interface, Apple Shortcuts Integration, Homebrew Cask Tap, Apple Notarization & 71 Tests PASS. *(SELESAI 100%)*
 
 > 📖 *Dokumen rinci roadmap dapat ditinjau di [Docs/Roadmap.md](Docs/Roadmap.md).*
 
