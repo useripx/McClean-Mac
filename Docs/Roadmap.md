@@ -127,21 +127,25 @@ flowchart TD
 
 ---
 
-### 🟣 FASE 4: Ekosistem Mendalam macOS & Distribusi Luas (v2.0.0-macos)
-**Target: Q2 2027 (April – Juni 2027) | Status: RENCANA STRATEGIS**
+### 🟢 FASE 4: Ekosistem Mendalam macOS & Distribusi Luas (v2.0.0-macos)
+**Target: 10 November 2026 | Status: SELESAI 100% (COMPLETED)**
 
-1. **Menu Bar / Status Item App (macOS Top Bar):**
-   - Menghadirkan ikon kecil MrClean di Menu Bar atas layar Mac (menggunakan `rumps` atau `pystray`), memungkinkan pembersihan cepat berkas kapan saja tanpa harus membuka jendela utama.
-2. **Integrasi Apple Shortcuts (Pintasan macOS):**
-   - Menyediakan aksi pintasan khusus (*Apple Shortcuts Action*) agar pengguna Mac dapat mengotomatisasi pembersihan berkas melalui Siri atau alur kerja macOS.
-3. **Distribusi via Homebrew Tap:**
-   - Menyediakan perintah instalasi satu baris terminal untuk komunitas pengembang Mac:
-     ```bash
-     brew tap useripx/mrclean
-     brew install --cask mrclean
-     ```
-4. **Persiapan Notarisasi Resmi Apple Developer:**
-   - Menyiapkan konfigurasi `codesign` dan alur kerja notarisasi otomatis ke server Apple (`notarytool`) bagi Mas Yogi Ario jika kelak menggunakan akun Apple Developer berbayar (\$99/tahun).
+- [x] **Headless CLI Interface (`src/cli.py`):**
+  - Perintah `inspect` (--json), `clean` (--preset, --inplace, -o), `spoof` (--profile), dan `--version` dengan exit code standar UNIX (`0` atau `1`).
+- [x] **Integrasi Apple Shortcuts (Pintasan macOS):**
+  - Panduan dan skrip shell automasi `integrations/shortcuts/` untuk Finder Share Sheet, Folder Actions, dan Siri.
+- [x] **Menu Bar / Status Item App (`src/gui/menubar_app.py`):**
+  - Status item di bar atas layar macOS via `pystray` (Quick Clean, Presets, Launch GUI) dengan notifikasi banner desktop.
+- [x] **Distribusi via Homebrew Tap & Cask:**
+  - Formula resmi Cask `packaging/homebrew/mrclean.rb` dengan symlink terminal `mrclean` dan panduan instalasi satu baris:
+    ```bash
+    brew tap useripx/mrclean
+    brew install --cask mrclean
+    ```
+- [x] **Alat Otomatisasi Notarisasi Resmi Apple Developer (`tools/notarize_mac.py`):**
+  - Generator perintah `codesign --options runtime`, `xcrun notarytool submit`, dan `xcrun stapler staple`.
+- [x] **Unit Testing Suite Menyeluruh:**
+  - 71 unit tests lulus tanpa gagal (**100% PASS, 0 GAGAL / 0 ERROR**).
 
 ---
 
@@ -152,4 +156,4 @@ flowchart TD
 | **Milestone 1** | `v1.0.0` | Paritas 11 Fitur, 44 Tests PASS, GUI Mac, Quick Action, `.icns`, CI/CD | 🟢 **SELESAI (100%)** |
 | **Milestone 2** | `v1.1.0` | Drag & Drop GUI, Universal 2 Fat Binary, Stylized DMG, Release Tool | 🟢 **SELESAI (100%)** |
 | **Milestone 3** | `v1.2.0` | Format RAW, Telemetri Drone GPS, Offline Map Viewer, Audio Stego | 🟢 **SELESAI (100%)** |
-| **Milestone 4** | `v2.0.0` | Menu Bar Quick Clean, Apple Shortcuts, Homebrew Cask, Apple Notarization | 🟡 **Fokus Berikutnya (Q2 2027)** |
+| **Milestone 4** | `v2.0.0` | Menu Bar Quick Clean, Headless CLI, Apple Shortcuts, Homebrew Cask, Notarisasi | 🟢 **SELESAI (100%)** |

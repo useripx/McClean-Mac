@@ -106,3 +106,9 @@ def scan_files(paths: List[str], recursive: bool = True) -> List[Dict[str, Any]]
                     break
 
     return discovered_files
+
+def scan_folder(folder_path: str, recursive: bool = True) -> List[str]:
+    """
+    Memindai folder dan mengembalikan daftar path lengkap berkas yang didukung.
+    """
+    return [item["path"] for item in scan_files([folder_path], recursive=recursive)]

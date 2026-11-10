@@ -62,4 +62,35 @@
 - Publikasi Git Tag resmi `v1.2.0` via `tools/create_release.py`.
 - Otomatisasi sinkronisasi filtered release ke branch `main` (100% bersih dari folder internal).
 - Push tag `v1.2.0` dan branch `main` ke remote GitHub `https://github.com/useripx/McClean-Mac.git` memicu workflow rilis DMG di GitHub Actions.
-- Menyiapkan `Docs/Implementation_plan_Fase_4.md` dan ADR-012 untuk implementasi Fase 4 (Headless CLI, Apple Shortcuts, Menu Bar app, Homebrew Cask, dan Apple Notarization).
+- Menyiapkan `Docs/Implementation_plan_Fase_4.md` dan ADR-012 untuk implementasi Fase 4.
+
+---
+
+## 🚀 Rincian Lengkap Fase 4 (v2.0.0-macos)
+
+### 1. Headless CLI Engine (`src/cli.py`)
+- Membangun antarmuka baris perintah murni tanpa GUI yang mendukung perintah `inspect`, `clean`, `spoof`, dan `--version`.
+- Mendukung format output JSON terstruktur (`--json`) untuk integrasi skrip dan automasi.
+- Mengintegrasikan deteksi sub-perintah CLI pada `src/main.py`.
+- Unit test `tests/test_cli.py` (7 tests lulus).
+
+### 2. Integrasi Apple Shortcuts & Skrip Shell (`integrations/shortcuts/`)
+- Membangun skrip shell automasi `integrations/shortcuts/clean_file.sh` dengan notifikasi banner desktop macOS.
+- Menyusun dokumentasi panduan konfigurasi Shortcuts untuk menu Finder Share Sheet, Folder Actions, dan Siri di `integrations/shortcuts/README.md`.
+
+### 3. macOS Menu Bar / Status Item App (`src/gui/menubar_app.py`)
+- Menghadirkan ikon status item di bar atas layar macOS (`pystray`) dengan ukuran 22x22 standar macOS Menu Bar.
+- Menu kilat: Quick Clean berkas, preset cepat (Developer, Media Sosial, Akademik), peluncuran GUI utama, dan Keluar.
+- Unit test `tests/test_menubar_app.py` terverifikasi lulus.
+
+### 4. Formula Distribusi Homebrew Cask (`packaging/homebrew/mrclean.rb`)
+- Membangun formula Cask Ruby resmi yang menghubungkan instalasi biner DMG dari GitHub Releases dan membuat symlink binary `mrclean` di terminal.
+- Menyusun panduan instalasi `brew install --cask mrclean` di `packaging/homebrew/README.md`.
+- Unit test `tests/test_homebrew_cask.py` terverifikasi lulus.
+
+### 5. Otomatisasi Notarisasi & Code Signing Apple Developer (`tools/notarize_mac.py`)
+- Membangun skrip helper generator perintah `codesign --options runtime`, `xcrun notarytool submit`, dan `xcrun stapler staple`.
+- Unit test `tests/test_notarization_script.py` terverifikasi lulus.
+
+### 6. Hasil Pengujian Akhir (Testing Gate Pilar 6)
+- Seluruh 71 unit tests di folder `tests/` berhasil lulus: **`HASIL: 100% PASS (71 PASS, 0 GAGAL / 0 ERROR)`**.

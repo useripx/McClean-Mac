@@ -90,3 +90,10 @@
 - **Konteks:** Tag rilis resmi `v1.2.0` telah diterbitkan ke remote GitHub. Tahap selanjutnya membutuhkan integrasi ekosistem mendalam macOS (CLI headless, Apple Shortcuts, Menu Bar app, Homebrew tap, dan Apple Notarization).
 - **Keputusan:** Mengimplementasikan Headless CLI (`src/cli.py`) dengan exit code standar UNIX, menyediakan panduan integrasi Apple Shortcuts, merancang macOS Menu Bar app (`src/gui/menubar_app.py`), formula Homebrew Cask (`packaging/homebrew/mrclean.rb`), dan skrip otomatisasi notarisasi Apple Developer (`tools/notarize_mac.py`).
 - **Konsekuensi:** Fleksibilitas penggunaan meningkat pesat (GUI, Menu Bar, Terminal CLI, dan Automasi Shortcuts) dengan standar keamanan Apple yang ketat.
+
+### ADR-013: Arsitektur Ekosistem macOS Lanjutan (CLI Headless, Menu Bar & Homebrew Cask)
+- **Tanggal:** 10 November 2026
+- **Status:** DITERIMA / AKTIF
+- **Konteks:** Untuk memenuhi standar aplikasi macOS kelas pro, MrClean perlu beroperasi dalam berbagai modalitas: GUI CustomTkinter, Menu Bar status item (`pystray`), headless terminal CLI (`src/cli.py`), automasi Apple Shortcuts (`integrations/shortcuts/`), serta distribusi Homebrew Cask.
+- **Keputusan:** Menyatukan entry point di `src/main.py` yang mendeteksi argumen baris perintah secara transparan, menyediakan status bar item dengan ikon 22x22 dan dialog pembersih native, menyediakan formula Ruby Cask terstandarisasi, dan menyusun skrip notarisasi resmi Apple Developer.
+- **Konsekuensi:** MrClean Mac v2.0.0-macos memiliki fleksibilitas tertinggi bagi pengguna biasa maupun pengembang mahir tanpa mengorbankan prinsip 100% offline dan paritas fitur.
