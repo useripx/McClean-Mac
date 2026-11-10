@@ -13,8 +13,8 @@
 | **Fase 0** | Inisialisasi Repositori, Aturan, Badges, & Dokumentasi | 🟢 Selesai | 100% |
 | **Fase 1 (v1.0.0)** | Core Engine Paritas, GUI macOS, Quick Action, ICNS & CI/CD | 🟢 Selesai (44 Tests PASS) | 100% |
 | **Fase 2 (v1.1.0)** | Drag & Drop GUI, Universal 2 Fat Binary, Stylized DMG & Release Tool | 🟢 Selesai (49 Tests PASS) | 100% |
-| **Fase 3 (v1.2.0)** | Format RAW Kamera, Telemetri Drone GPS, Offline Map Viewer, Audio Stego | 🟢 Selesai (57 Tests PASS) | 100% |
-| **Fase 4 (v2.0.0)** | Menu Bar Tray App, Apple Shortcuts, Homebrew Cask, Notarisasi | ⚪ Antre (Q2 2027) | 0% |
+| **Fase 3 (v1.2.0)** | Format RAW Kamera, Telemetri Drone GPS, Offline Map Viewer, Audio Stego | 🟢 Selesai (57 Tests PASS & Rilis Tag v1.2.0 Dipublikasikan) | 100% |
+| **Fase 4 (v2.0.0)** | Menu Bar Tray App, Apple Shortcuts, Homebrew Cask, Notarisasi | 🟡 Siap Diimplementasikan (Plan Approved) | 0% |
 
 ---
 

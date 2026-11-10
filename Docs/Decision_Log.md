@@ -83,3 +83,10 @@
 - **Konteks:** Pengguna perlu memeriksa posisi geografis koordinat GPS tanpa melanggar prinsip *Zero-Telemetry* (dilarang mengirim panggilan API keluar ke Google Maps atau OpenStreetMap).
 - **Keputusan:** Membangun `src/gui/dialogs/map_dialog.py` yang merender radar kompas, grid koordinat desimal/DMS, dan pin peta vektor secara lokal di Tkinter Canvas.
 - **Konsekuensi:** Peta interaktif dapat dibuka kapan saja di Mac tanpa koneksi internet sama sekali.
+
+### ADR-012: Rilis Tag v1.2.0 & Desain Arsitektur Fase 4 (v2.0.0-macos)
+- **Tanggal:** 10 November 2026
+- **Status:** DITERIMA / AKTIF
+- **Konteks:** Tag rilis resmi `v1.2.0` telah diterbitkan ke remote GitHub. Tahap selanjutnya membutuhkan integrasi ekosistem mendalam macOS (CLI headless, Apple Shortcuts, Menu Bar app, Homebrew tap, dan Apple Notarization).
+- **Keputusan:** Mengimplementasikan Headless CLI (`src/cli.py`) dengan exit code standar UNIX, menyediakan panduan integrasi Apple Shortcuts, merancang macOS Menu Bar app (`src/gui/menubar_app.py`), formula Homebrew Cask (`packaging/homebrew/mrclean.rb`), dan skrip otomatisasi notarisasi Apple Developer (`tools/notarize_mac.py`).
+- **Konsekuensi:** Fleksibilitas penggunaan meningkat pesat (GUI, Menu Bar, Terminal CLI, dan Automasi Shortcuts) dengan standar keamanan Apple yang ketat.

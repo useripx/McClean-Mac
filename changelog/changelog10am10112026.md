@@ -57,3 +57,9 @@
 
 ### 5. Hasil Verifikasi Pengujian Akhir
 - Seluruh 57 unit tests di folder `tests/` berhasil lulus: **`HASIL: 100% PASS (57 PASS, 0 GAGAL / 0 ERROR)`**.
+
+### 6. Publikasi Rilis Resmi v1.2.0 & Persiapan Fase 4
+- Publikasi Git Tag resmi `v1.2.0` via `tools/create_release.py`.
+- Otomatisasi sinkronisasi filtered release ke branch `main` (100% bersih dari folder internal).
+- Push tag `v1.2.0` dan branch `main` ke remote GitHub `https://github.com/useripx/McClean-Mac.git` memicu workflow rilis DMG di GitHub Actions.
+- Menyiapkan `Docs/Implementation_plan_Fase_4.md` dan ADR-012 untuk implementasi Fase 4 (Headless CLI, Apple Shortcuts, Menu Bar app, Homebrew Cask, dan Apple Notarization).
