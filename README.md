@@ -144,6 +144,18 @@ Hasil kompilasi akan berada di folder `dist/`:
 
 ---
 
+## 🗺️ Peta Jalan Pengembangan (Roadmap)
+
+Peta jalan pengembangan produk MrClean Mac terbagi dalam 4 fase strategis:
+- 🟢 **Fase 1 (v1.0.0-macos):** Pondasi 11 Fitur Paritas Penuh, Test Suite 100% PASS (44 Tests), GUI Apple San Francisco, Finder Quick Action, Aset Apple ICNS, Packaging DMG & GitHub Actions CI/CD. *(SELESAI)*
+- 🟡 **Fase 2 (v1.1.0-macos):** Publikasi Rilis GitHub DMG, Universal 2 Fat Binary (`arm64` + `x86_64`), Stylized DMG Installer, dan Drag & Drop native. *(Fokus Saat Ini)*
+- 🔵 **Fase 3 (v1.2.0-macos):** Dukungan format RAW Kamera (Sony ARW, Canon CR3, Nikon NEF), Telemetri Drone GPS, dan Viewer Peta Offline. *(Q1 2027)*
+- 🟣 **Fase 4 (v2.0.0-macos):** macOS Menu Bar Status Item App, Apple Shortcuts Integration, Homebrew Tap Distribution, dan Apple Notarization. *(Q2 2027)*
+
+> 📖 *Dokumen rinci roadmap dapat ditinjau di [Docs/Roadmap.md](Docs/Roadmap.md).*
+
+---
+
 ## 🏛️ Tata Kelola & Standar Kerja (8 Pilar Universal)
 
 Proyek ini dikembangkan dengan mematuhi **Master Framework Governance**:
