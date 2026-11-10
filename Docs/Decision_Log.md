@@ -27,3 +27,24 @@
 - **Konteks:** Backend inspeksi dan pembersihan metadata bersifat murni Python (Pillow, PyPDF, mutagen, python-docx), sedangkan GUI menggunakan CustomTkinter dengan penyesuaian event Apple Command (`⌘`), font SF Pro, dan deteksi mode gelap via `darkdetect`.
 - **Keputusan:** Mempertahankan logika backend 100% identik dengan versi Windows (paritas 11 fitur) dengan adaptasi spesifik macOS pada layer GUI, path developer regex (`/Users/user`), dan integrasi Finder Quick Action.
 - **Konsekuensi:** Konsistensi hasil inspeksi dan pembersihan antar-platform terjamin 100%.
+
+### ADR-004: Integrasi Sistem Native macOS (Finder Quick Actions & Notifikasi)
+- **Tanggal:** 10 November 2026
+- **Status:** DITERIMA / AKTIF
+- **Konteks:** Di macOS tidak terdapat Windows Registry HKCU. Pengguna Mac memerlukan cara cepat membersihkan file langsung dari Finder.
+- **Keputusan:** Membangun `MacShellIntegration` di `src/utils/mac_shell_integration.py` yang memasang bundel Quick Action Automator `.workflow` di `~/Library/Services/` dan mengirim notifikasi banner desktop native via `osascript`.
+- **Konsekuensi:** Pengguna Mac dapat membersihkan berkas langsung dari menu klik kanan Finder tanpa hak Administrator.
+
+### ADR-005: Pembangkitan Multi-Resolusi Ikon Apple ICNS
+- **Tanggal:** 10 November 2026
+- **Status:** DITERIMA / AKTIF
+- **Konteks:** macOS mewajibkan format ikon `.icns` untuk tampilan Dock dan bundel `.app` Retina.
+- **Keputusan:** Memperbarui `src/utils/icon_converter.py` untuk mengonversi `asset/logo.png` (1024x1024) langsung menjadi format biner Apple `assets/icon.icns` yang mencakup layer multi-resolusi 16x16 hingga 1024x1024 @2x Retina.
+- **Konsekuensi:** Ikon aplikasi tampil tajam dan bebas pecah pada seluruh resolusi monitor Apple.
+
+### ADR-006: Otomatisasi Cloud Packaging via GitHub Actions (`macos-latest`)
+- **Tanggal:** 10 November 2026
+- **Status:** DITERIMA / AKTIF
+- **Konteks:** Pengembang memerlukan cara membuat bundel `.app` dan `.dmg` secara gratis dan otomatis tanpa harus memiliki perangkat keras Mac fisik lokal.
+- **Keputusan:** Menyiapkan alur kerja CI/CD `.github/workflows/build-mac.yml` yang berjalan di runner native Apple Silicon M-series (`macos-latest`) pada setiap push ke branch `develop`/`main` atau tag rilis.
+- **Konsekuensi:** Installer `MrClean-macOS.dmg` dihasilkan secara otomatis di cloud GitHub.
