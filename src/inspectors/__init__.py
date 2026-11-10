@@ -3,6 +3,8 @@ MetaClean — Inspector Dispatcher
 Menentukan dan menjalankan inspektor yang tepat untuk setiap berkas.
 """
 from typing import Dict, Any, List
+from src.inspectors.raw_inspector import RawCameraInspector
+from src.inspectors.drone_inspector import DroneTelemetryInspector
 from src.inspectors.image_inspector import ImageInspector
 from src.inspectors.pdf_inspector import PdfInspector
 from src.inspectors.docx_inspector import DocxInspector
@@ -10,8 +12,11 @@ from src.inspectors.media_inspector import MediaInspector
 from src.inspectors.text_inspector import TextInspector
 from src.inspectors.risk_scorer import calculate_privacy_risk
 from src.inspectors.ai_forensics import AIForensicsInspector
+from src.watermarks.audio_stego import AudioStegoInspector
 
 ALL_INSPECTORS = [
+    RawCameraInspector(),
+    DroneTelemetryInspector(),
     ImageInspector(),
     PdfInspector(),
     DocxInspector(),

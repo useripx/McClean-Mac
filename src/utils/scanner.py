@@ -7,6 +7,7 @@ import os
 from typing import List, Dict, Any
 
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".tiff", ".tif", ".bmp", ".gif"}
+RAW_EXTENSIONS = {".arw", ".cr2", ".cr3", ".nef", ".raf", ".dng", ".orf", ".rw2"}
 PDF_EXTENSIONS = {".pdf"}
 DOCX_EXTENSIONS = {".docx"}
 MEDIA_EXTENSIONS = {".mp3", ".mp4", ".m4a", ".wav", ".flac", ".ogg", ".mkv", ".avi", ".wma"}
@@ -32,6 +33,7 @@ ALL_TEXT_AND_CODE_EXTENSIONS = MARKDOWN_EXTENSIONS | TEXT_EXTENSIONS | CODING_EX
 
 ALL_SUPPORTED_EXTENSIONS = (
     IMAGE_EXTENSIONS
+    | RAW_EXTENSIONS
     | PDF_EXTENSIONS
     | DOCX_EXTENSIONS
     | MEDIA_EXTENSIONS
@@ -43,6 +45,8 @@ def get_file_category(file_path: str) -> str:
     ext = os.path.splitext(file_path)[1].lower()
     if ext in IMAGE_EXTENSIONS:
         return "image"
+    elif ext in RAW_EXTENSIONS:
+        return "raw_image"
     elif ext in PDF_EXTENSIONS:
         return "pdf"
     elif ext in DOCX_EXTENSIONS:
