@@ -69,6 +69,19 @@ class MetaCleanApp(ctk.CTk):
         if IS_MAC:
             self.bind("<Command-q>", lambda e: self.quit())
             self.bind("<Command-w>", lambda e: self.quit())
+            # Integrasi macOS Dock Drop & OpenDocument Handler
+            try:
+                self.createcommand("::tk::mac::OpenDocument", self._mac_open_document)
+            except Exception:
+                pass
+
+        # Dukungan Drag-and-Drop (TkinterDnD2 jika tersedia)
+        try:
+            if hasattr(self, 'drop_target_register'):
+                self.drop_target_register("*")
+                self.dnd_bind("<<Drop>>", lambda e: self.handle_dropped_paths(self.parse_dropped_files(e.data)))
+        except Exception:
+            pass
 
         # Ikon Aplikasi Window & Taskbar
         icon_path = get_asset_path("icon.ico")
@@ -354,6 +367,38 @@ class MetaCleanApp(ctk.CTk):
         )
         msg.pack(expand=True, pady=120)
 
+    def _mac_open_document(self, *filenames):
+        """Handler event native macOS saat berkas dibuka melalui Dock atau Finder OpenWith."""
+        paths = [os.path.abspath(f) for f in filenames if os.path.exists(f)]
+        if paths:
+            self.after(200, lambda: self.handle_dropped_paths(paths))
+
+    @staticmethod
+    def parse_dropped_files(raw_data: str) -> list:
+        """Menguraikan data drag-and-drop dari OS/Tkinter menjadi daftar path yang valid."""
+        if not raw_data:
+            return []
+        import re
+        pattern = re.compile(r"\{([^}]+)\}|(\S+)")
+        matches = pattern.findall(raw_data)
+        paths = []
+        for m in matches:
+            p = m[0] if m[0] else m[1]
+            p = p.strip()
+            if p and os.path.exists(p):
+                paths.append(os.path.abspath(p))
+        return paths
+
+    def handle_dropped_paths(self, paths: list) -> int:
+        """Menangani daftar path yang ditarik dan dilepas (drag-and-drop) ke aplikasi."""
+        if not paths:
+            return 0
+        valid = [os.path.abspath(p) for p in paths if isinstance(p, str) and p.strip()]
+        existing = [p for p in valid if os.path.exists(p)]
+        if existing:
+            self._process_paths(existing)
+        return len(existing)
+
     def _on_choose_files(self):
         filetypes = [
             ("Semua Berkas yang Didukung", "*.jpg;*.jpeg;*.png;*.webp;*.pdf;*.docx;*.mp3;*.mp4;*.md;*.txt;*.html;*.js;*.py;*.php;*.java;*.cpp;*.json;*.xml;*.yaml"),
@@ -421,7 +466,8 @@ class MetaCleanApp(ctk.CTk):
         if not self.scanned_items:
             empty_lbl = ctk.CTkLabel(
                 self.file_scroll,
-                text="Belum ada berkas yang dimuat.",
+                text="Belum ada berkas yang dimuat.\n\n📂 Tarik & Lepas (Drag-and-Drop) berkas/folder ke sini\natau klik tombol 'Pilih Berkas' di atas.",
+                font=ctk.CTkFont(family=APP_FONT_FAMILY, size=12),
                 text_color="gray"
             )
             empty_lbl.pack(pady=40)
