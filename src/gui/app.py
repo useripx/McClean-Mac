@@ -1309,6 +1309,11 @@ class MetaCleanApp(ctk.CTk):
 
 def main():
     app = MetaCleanApp()
+    # Jika dipanggil via CLI atau Finder Quick Action dengan argumen berkas/folder
+    if len(sys.argv) > 1:
+        initial_paths = [p for p in sys.argv[1:] if os.path.exists(p)]
+        if initial_paths:
+            app.after(300, lambda: app._process_paths(initial_paths))
     app.mainloop()
 
 if __name__ == "__main__":

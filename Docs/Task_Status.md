@@ -24,7 +24,7 @@
 
 ### Fase 0: Setup Repositori & Tata Kelola
 - [x] Membaca dan memahami `aturan/universal-rule.md`, `aturan/AGENTS.md`, `aturan/GEMINI.md`.
-- [x] Membaca dan memahami `Docs/implementtaion_plan.md` dan `Docs/overview/overview.md`.
+- [x] Membaca dan memahami `Docs/Implementation_plan.md` dan `Docs/overview/overview.md`.
 - [x] Memverifikasi aset logo `asset/logo.png` (1024x1024).
 - [x] Membuat berkas `.gitignore` komprehensif macOS & Python (Pilar 3).
 - [x] Membuat berkas `README.md` dengan badge lengkap (Repo Size, Forks, Logo, dll.).
