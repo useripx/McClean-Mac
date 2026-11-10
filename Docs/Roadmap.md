@@ -109,17 +109,21 @@ flowchart TD
 
 ---
 
-### 🔵 FASE 3: Ekstensi Format & Forensik Tingkat Lanjut (v1.2.0-macos)
-**Target: Q1 2027 (Januari – Maret 2027) | Status: RENCANA MASA DEPAN**
+### 🟢 FASE 3: Ekstensi Format & Forensik Tingkat Lanjut (v1.2.0-macos)
+**Target: 10 November 2026 | Status: SELESAI 100% (COMPLETED)**
 
-1. **Dukungan Format Kamera Profesional (RAW Formats):**
-   - Memperluas inspector dan cleaner untuk membaca dan membersihkan metadata pada format mentah fotografi: Sony (`.ARW`), Canon (`.CR2`/`.CR3`), Nikon (`.NEF`), Fujifilm (`.RAF`), dan DNG (`.DNG`).
-2. **Ekstraksi Telemetri & GPS Video Drone:**
-   - Mendeteksi dan membersihkan metadata penerbangan, koordinat GPS rute, dan nomor seri pada video drone DJI, GoPro, dan kamera aksi.
-3. **Viewer Peta GPS Interaktif Offline:**
-   - Menambahkan tombol *"Lihat Lokasi di Peta"* pada inspector metadata GPS yang menampilkan peta interaktif lokal (tanpa koneksi internet) menggunakan ubin peta ter-cache lokal atau representasi visual koordinat.
-4. **Deteksi Watermark Audio Spektrogram:**
-   - Menganalisis watermark audio steganografi frekuensi tinggi pada berkas WAV/FLAC/MP3.
+- [x] **Dukungan Format Kamera Profesional (RAW Formats):**
+  - Ekstraksi dan pembersihan metadata foto mentah: Sony (`.ARW`), Canon (`.CR2`/`.CR3`), Nikon (`.NEF`), Fujifilm (`.RAF`), Adobe (`.DNG`), Olympus (`.ORF`), dan Panasonic (`.RW2`).
+  - Netralisasi nomor seri bodi kamera, nomor seri lensa, dan tag GPS IFD.
+- [x] **Ekstraksi & Pembersihan Telemetri Video Drone (DJI / GoPro):**
+  - Deteksi dan pembersihan atom QuickTime `moov.udta` & subtitle stream GPS video drone tanpa re-encoding video.
+- [x] **Viewer Peta GPS Interaktif 100% Offline (`OfflineMapDialog`):**
+  - Jendela visualisasi pin peta vektor dan radar kompas koordinat (DD & DMS) lokal tanpa internet.
+  - Tombol *"🗺️ Buka Peta GPS Offline"* pada antarmuka GUI detail viewer.
+- [x] **Deteksi Steganografi Audio Spektrogram (`AudioStegoInspector`):**
+  - Analisis anomali frekuensi ultrasonik dan chunk tersembunyi pada berkas audio WAV, FLAC, dan MP3.
+- [x] **Pengujian Unit Otomatis Tambahan:**
+  - 57 unit tests lulus tanpa gagal (**100% PASS, 0 GAGAL / 0 ERROR**).
 
 ---
 
@@ -147,5 +151,5 @@ flowchart TD
 | :--- | :---: | :--- | :---: |
 | **Milestone 1** | `v1.0.0` | Paritas 11 Fitur, 44 Tests PASS, GUI Mac, Quick Action, `.icns`, CI/CD | 🟢 **SELESAI (100%)** |
 | **Milestone 2** | `v1.1.0` | Drag & Drop GUI, Universal 2 Fat Binary, Stylized DMG, Release Tool | 🟢 **SELESAI (100%)** |
-| **Milestone 3** | `v1.2.0` | Format RAW, Telemetri Drone GPS, Offline Map Viewer, Audio Stego | 🟡 **Fokus Berikutnya (Q1 2027)** |
-| **Milestone 4** | `v2.0.0` | Menu Bar Quick Clean, Apple Shortcuts, Homebrew Cask, Apple Notarization | ⚪ Terjadwal Q2 2027 |
+| **Milestone 3** | `v1.2.0` | Format RAW, Telemetri Drone GPS, Offline Map Viewer, Audio Stego | 🟢 **SELESAI (100%)** |
+| **Milestone 4** | `v2.0.0` | Menu Bar Quick Clean, Apple Shortcuts, Homebrew Cask, Apple Notarization | 🟡 **Fokus Berikutnya (Q2 2027)** |

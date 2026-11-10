@@ -401,12 +401,13 @@ class MetaCleanApp(ctk.CTk):
 
     def _on_choose_files(self):
         filetypes = [
-            ("Semua Berkas yang Didukung", "*.jpg;*.jpeg;*.png;*.webp;*.pdf;*.docx;*.mp3;*.mp4;*.md;*.txt;*.html;*.js;*.py;*.php;*.java;*.cpp;*.json;*.xml;*.yaml"),
-            ("Berkas Markdown (*.md)", "*.md;*.markdown"),
-            ("Berkas Kode Pemrograman (*.html, *.js, *.py, dll.)", "*.html;*.htm;*.css;*.js;*.jsx;*.ts;*.tsx;*.py;*.php;*.java;*.c;*.cpp;*.cs;*.go;*.rs;*.json;*.xml;*.yaml;*.sql;*.sh"),
+            ("Semua Berkas yang Didukung", "*.jpg;*.jpeg;*.png;*.webp;*.pdf;*.docx;*.mp3;*.mp4;*.md;*.txt;*.html;*.js;*.py;*.arw;*.cr2;*.cr3;*.nef;*.raf;*.dng;*.orf;*.rw2"),
+            ("Foto Kamera Mentah RAW (*.arw, *.cr2, *.cr3, *.nef, *.dng, dll.)", "*.arw;*.cr2;*.cr3;*.nef;*.raf;*.dng;*.orf;*.rw2"),
             ("Gambar (JPG, PNG, WEBP)", "*.jpg;*.jpeg;*.png;*.webp;*.tiff;*.bmp"),
             ("Dokumen (PDF, Word)", "*.pdf;*.docx"),
             ("Media (Audio & Video)", "*.mp3;*.mp4;*.wav;*.mkv;*.m4a"),
+            ("Berkas Markdown (*.md)", "*.md;*.markdown"),
+            ("Berkas Kode Pemrograman (*.html, *.js, *.py, dll.)", "*.html;*.htm;*.css;*.js;*.jsx;*.ts;*.tsx;*.py;*.php;*.java;*.c;*.cpp;*.cs;*.go;*.rs;*.json;*.xml;*.yaml;*.sql;*.sh"),
             ("Seluruh Berkas (*.*)", "*.*")
         ]
         paths = filedialog.askopenfilenames(title="Pilih Berkas untuk Diperiksa", filetypes=filetypes)
@@ -803,6 +804,19 @@ class MetaCleanApp(ctk.CTk):
                         text_color="#b0bec5",
                         wraplength=400
                     ).pack(side="left", fill="x", expand=True)
+
+                if cat_name == "Lokasi GPS":
+                    btn_map = ctk.CTkButton(
+                        cat_frame,
+                        text="🗺️ Buka Peta GPS Offline",
+                        height=24,
+                        width=160,
+                        fg_color="#0284c7",
+                        hover_color="#0369a1",
+                        font=ctk.CTkFont(size=11, weight="bold"),
+                        command=lambda d=cat_data, fn=item.get("file_name"): self._open_offline_map_dialog(d, fn)
+                    )
+                    btn_map.pack(anchor="w", padx=15, pady=(4, 6))
             else:
                 ctk.CTkLabel(
                     cat_frame,
@@ -818,6 +832,42 @@ class MetaCleanApp(ctk.CTk):
         self.item_check_vars.clear()
         self._refresh_file_list()
         self.status_bar.configure(text="Daftar berkas telah dikosongkan.")
+
+    def _open_offline_map_dialog(self, gps_data, file_name):
+        """Membuka dialog visualisasi peta koordinat GPS 100% offline."""
+        from src.gui.dialogs.map_dialog import OfflineMapDialog
+        import re
+
+        lat = None
+        lon = None
+        alt = gps_data.get("Ketinggian (Altitude)") or gps_data.get("GPSAltitude", "")
+
+        for k, v in gps_data.items():
+            k_lower = k.lower()
+            val_str = str(v)
+            if "lat" in k_lower:
+                m = re.search(r"[-+]?\d*\.?\d+", val_str)
+                if m:
+                    try:
+                        lat = float(m.group(0))
+                        if "s" in val_str.lower() and lat > 0:
+                            lat = -lat
+                    except Exception:
+                        pass
+            elif "lon" in k_lower or "long" in k_lower:
+                m = re.search(r"[-+]?\d*\.?\d+", val_str)
+                if m:
+                    try:
+                        lon = float(m.group(0))
+                        if ("w" in val_str.lower() or "b" in val_str.lower() and "barat" in val_str.lower()) and lon > 0:
+                            lon = -lon
+                    except Exception:
+                        pass
+
+        if lat is not None and lon is not None:
+            OfflineMapDialog(self, latitude=lat, longitude=lon, altitude=alt, file_name=file_name)
+        else:
+            messagebox.showinfo("Info Koordinat", "Tidak dapat mengekstrak titik numerik koordinat GPS untuk peta.", parent=self)
 
     def _get_target_selection_paths(self):
         """Mendapatkan daftar path berkas yang akan diproses (dari centang checkbox atau item aktif)."""

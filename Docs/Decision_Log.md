@@ -62,3 +62,24 @@
 - **Konteks:** Pengembang membutuhkan kemudahan memublikasikan versi rilis dengan tag Git resmi tanpa risiko melanggar kebersihan branch `main`.
 - **Keputusan:** Membangun `tools/create_release.py` yang memvalidasi SemVer, memastikan testing gate 100% PASS, menyinkronkan rilis bersih ke `main`, dan memicu workflow rilis GitHub Actions.
 - **Konsekuensi:** Distribusi versi rilis terstandarisasi, aman, dan dapat diulang (*reproducible*).
+
+### ADR-009: Parser Format Foto Kamera RAW Murni Python (TIFF/IFD Struct)
+- **Tanggal:** 10 November 2026
+- **Status:** DITERIMA / AKTIF
+- **Konteks:** Format foto kamera RAW (Sony ARW, Canon CR2/CR3, Nikon NEF, Adobe DNG) memiliki struktur biner khusus yang kaya metadata sensitif (serial bodi kamera, serial lensa, lokasi GPS). Penggunaan wrapper C++ eksternal (`rawpy`) mempersulit kompilasi portabel di macOS.
+- **Keputusan:** Membangun `src/inspectors/raw_inspector.py` dan `src/cleaners/raw_cleaner.py` menggunakan parser biner murni struct TIFF/IFD & ISOBMFF.
+- **Konsekuensi:** Ekstraksi dan pembersihan metadata RAW berjalan instan, andal, dan tanpa dependensi compiler C++.
+
+### ADR-010: Pembersihan Telemetri Video Drone Tanpa Re-Encoding (Atom Manipulation)
+- **Tanggal:** 10 November 2026
+- **Status:** DITERIMA / AKTIF
+- **Konteks:** Video drone DJI / GoPro menyimpan data koordinat penerbangan rahasia di dalam atom QuickTime `moov.udta`. Melakukan render ulang video (*re-encoding*) membutuhkan waktu lama dan menurunkan kualitas visual.
+- **Keputusan:** Membangun `src/cleaners/drone_cleaner.py` yang menetralkan atom `moov.udta` menjadi atom `free` padding langsung pada berkas biner dalam hitungan detik.
+- **Konsekuensi:** Video tetap 100% berkualitas asli (lossless), stream audio sinkron, dan jejak telemetri drone hilang total.
+
+### ADR-011: Visualisasi Peta GPS Vektor 100% Offline
+- **Tanggal:** 10 November 2026
+- **Status:** DITERIMA / AKTIF
+- **Konteks:** Pengguna perlu memeriksa posisi geografis koordinat GPS tanpa melanggar prinsip *Zero-Telemetry* (dilarang mengirim panggilan API keluar ke Google Maps atau OpenStreetMap).
+- **Keputusan:** Membangun `src/gui/dialogs/map_dialog.py` yang merender radar kompas, grid koordinat desimal/DMS, dan pin peta vektor secara lokal di Tkinter Canvas.
+- **Konsekuensi:** Peta interaktif dapat dibuka kapan saja di Mac tanpa koneksi internet sama sekali.

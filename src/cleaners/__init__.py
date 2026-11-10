@@ -2,6 +2,8 @@
 MetaClean — Cleaner Dispatcher
 """
 from typing import Dict, Any, Optional
+from src.cleaners.raw_cleaner import RawCameraCleaner
+from src.cleaners.drone_cleaner import DroneTelemetryCleaner
 from src.cleaners.image_cleaner import ImageCleaner
 from src.cleaners.pdf_cleaner import PdfCleaner
 from src.cleaners.docx_cleaner import DocxCleaner
@@ -9,6 +11,8 @@ from src.cleaners.media_cleaner import MediaCleaner
 from src.cleaners.text_cleaner import TextCleaner
 
 ALL_CLEANERS = [
+    RawCameraCleaner(),
+    DroneTelemetryCleaner(),
     ImageCleaner(),
     PdfCleaner(),
     DocxCleaner(),

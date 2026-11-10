@@ -1,7 +1,7 @@
 # Task Status — MrClean Mac
 
-> **STATUS PROYEK:** FASE 1 & FASE 2 SELESAI 100% (49 TESTS PASS)  
-> **TERAKHIR DIPERBARUI:** 10 November 2026 (10:00 AM)  
+> **STATUS PROYEK:** FASE 1, FASE 2, & FASE 3 SELESAI 100% (57 TESTS PASS)  
+> **TERAKHIR DIPERBARUI:** 10 November 2026 (10:15 AM)  
 > **LEAD DEVELOPER:** Yogi Ario  
 
 ---
@@ -13,25 +13,28 @@
 | **Fase 0** | Inisialisasi Repositori, Aturan, Badges, & Dokumentasi | 🟢 Selesai | 100% |
 | **Fase 1 (v1.0.0)** | Core Engine Paritas, GUI macOS, Quick Action, ICNS & CI/CD | 🟢 Selesai (44 Tests PASS) | 100% |
 | **Fase 2 (v1.1.0)** | Drag & Drop GUI, Universal 2 Fat Binary, Stylized DMG & Release Tool | 🟢 Selesai (49 Tests PASS) | 100% |
-| **Fase 3 (v1.2.0)** | Format RAW Kamera, Telemetri Drone GPS, Offline Map Viewer | ⚪ Antre (Q1 2027) | 0% |
+| **Fase 3 (v1.2.0)** | Format RAW Kamera, Telemetri Drone GPS, Offline Map Viewer, Audio Stego | 🟢 Selesai (57 Tests PASS) | 100% |
 | **Fase 4 (v2.0.0)** | Menu Bar Tray App, Apple Shortcuts, Homebrew Cask, Notarisasi | ⚪ Antre (Q2 2027) | 0% |
 
 ---
 
-## 📋 Rincian Checklist Fase 2 (v1.1.0-macos)
+## 📋 Rincian Checklist Fase 3 (v1.2.0-macos)
 
-### UX Lanjutan & Drag-and-Drop
-- [x] Implementasi `handle_dropped_paths` dan `parse_dropped_files` pada `src/gui/app.py`.
-- [x] Dukungan event native macOS `::tk::mac::OpenDocument` untuk penarikan berkas ke ikon Dock.
-- [x] Tampilan visual drop-zone pada tabel daftar berkas saat kosong.
-- [x] Unit test `tests/test_drag_and_drop.py` terverifikasi lulus.
+### Format Kamera Mentah / RAW
+- [x] Parser RAW berbasis TIFF/IFD & ISOBMFF (`src/inspectors/raw_inspector.py`) untuk Sony ARW, Canon CR2/CR3, Nikon NEF, Fuji RAF, Adobe DNG, Olympus ORF, Panasonic RW2.
+- [x] Pembersih tag RAW sensitif (`src/cleaners/raw_cleaner.py`).
+- [x] Unit test `tests/test_raw_inspector.py` terverifikasi lulus.
 
-### Packaging & Universal 2 Fat Binary
-- [x] Penambahan opsi `--universal` (`--target-arch universal2`) pada `build_mac.py`.
-- [x] Integrasi `create-dmg` dengan visual layout Apple HIG (Ikon ➜ Panah ➜ /Applications) dan fallback otomatis `hdiutil`.
-- [x] Workflow `.github/workflows/build-mac.yml` dengan trigger upload aset biner DMG otomatis ke GitHub Releases.
+### Telemetri Video Drone & Action Camera
+- [x] Detektor atom QuickTime `moov.udta` & telemetri GPS drone DJI / GoPro (`src/inspectors/drone_inspector.py`).
+- [x] Pembersih telemetri video drone (`src/cleaners/drone_cleaner.py`) tanpa re-encoding video.
+- [x] Unit test `tests/test_drone_inspector.py` terverifikasi lulus.
 
-### Release Automation
-- [x] Pembuatan alat CLI rilis `tools/create_release.py` dengan validasi SemVer dan testing gate.
-- [x] Unit test `tests/test_release_tool.py` terverifikasi lulus.
-- [x] Sinkronisasi rilis bersih ke branch `main` via `tools/sync_to_main.py`.
+### Visualisasi Peta GPS Offline
+- [x] Dialog modal penampil peta vektor radar GPS 100% Offline (`src/gui/dialogs/map_dialog.py`).
+- [x] Tombol *"🗺️ Buka Peta GPS Offline"* diintegrasikan pada antarmuka GUI detail viewer (`src/gui/app.py`).
+- [x] Unit test `tests/test_offline_map.py` terverifikasi lulus.
+
+### Steganografi Audio Spektrogram
+- [x] Inspektor tanda air frekuensi ultrasonik dan chunk tersembunyi RIFF/ID3 (`src/watermarks/audio_stego.py`).
+- [x] Unit test `tests/test_audio_stego.py` terverifikasi lulus.

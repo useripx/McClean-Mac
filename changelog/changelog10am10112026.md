@@ -29,3 +29,31 @@
 - Memperbarui `Docs/Task_Status.md` dan `Docs/Roadmap.md` (Fase 2 status 100% Selesai).
 - Menambahkan rekaman keputusan arsitektur ADR-007 dan ADR-008 pada `Docs/Decision_Log.md`.
 - Memperbarui ringkasan roadmap pada `README.md`.
+
+
+---
+
+## 🚀 Rincian Tambahan Fase 3 (v1.2.0-macos)
+
+### 1. Ekstensi Format Kamera Profesional (RAW Image Formats)
+- Membangun `src/inspectors/raw_inspector.py` yang mendukung ekstraksi metadata format RAW: Sony (`.arw`), Canon (`.cr2`, `.cr3`), Nikon (`.nef`), Fujifilm (`.raf`), Adobe (`.dng`), Olympus (`.orf`), dan Panasonic (`.rw2`).
+- Mengekstrak nomor seri bodi kamera, nomor seri lensa, dan koordinat GPS geofence.
+- Membangun `src/cleaners/raw_cleaner.py` yang menetralkan tag sensitif RAW tanpa merusak data mentah sensor.
+- Unit test `tests/test_raw_inspector.py` terverifikasi lulus.
+
+### 2. Forensik Telemetri Video Drone & Action Camera (DJI / GoPro)
+- Membangun `src/inspectors/drone_inspector.py` yang mendeteksi atom QuickTime `moov.udta` & subtitle stream GPS video drone DJI / GoPro.
+- Membangun `src/cleaners/drone_cleaner.py` yang menetralkan atom telemetri menjadi atom `free` padding tanpa re-encoding video.
+- Unit test `tests/test_drone_inspector.py` terverifikasi lulus.
+
+### 3. Visualisasi Peta GPS Vektor 100% Offline
+- Membangun `src/gui/dialogs/map_dialog.py` (`OfflineMapDialog`) yang menampilkan visualisasi pin peta vektor dan radar kompas koordinat (DD & DMS) lokal tanpa internet.
+- Menambahkan tombol interaktif *"🗺️ Buka Peta GPS Offline"* pada baris Lokasi GPS di antarmuka GUI detail viewer (`src/gui/app.py`).
+- Unit test `tests/test_offline_map.py` terverifikasi lulus.
+
+### 4. Deteksi Steganografi Audio Spektrogram
+- Membangun `src/watermarks/audio_stego.py` (`AudioStegoInspector`) yang menganalisis anomali frekuensi ultrasonik dan chunk tersembunyi pada berkas audio WAV, FLAC, dan MP3.
+- Unit test `tests/test_audio_stego.py` terverifikasi lulus.
+
+### 5. Hasil Verifikasi Pengujian Akhir
+- Seluruh 57 unit tests di folder `tests/` berhasil lulus: **`HASIL: 100% PASS (57 PASS, 0 GAGAL / 0 ERROR)`**.
