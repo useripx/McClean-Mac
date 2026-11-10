@@ -13,6 +13,11 @@ import re
 import subprocess
 import argparse
 
+# Pastikan root direktori proyek terdaftar dalam sys.path
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
 SEMVER_PATTERN = re.compile(r"^v\d+\.\d+\.\d+(-[a-zA-Z0-9.]+)?$")
 
 def validate_tag(tag: str) -> bool:
